@@ -14,7 +14,7 @@ Usage :
 Monday, April 25, 2022
 
 """
-import numpy as np
+from random import randrange
 from typing import List
 from fastapi import FastAPI
 from pydantic import BaseModel
@@ -31,4 +31,4 @@ class Item(BaseModel):
 @app.post("/", response_model=List[Item])
 def get_similar(itmvec : DeepFeatures):
     return [Item(itmcode=itmcd, itmurl='https://dummyimage.com/{}'.format(itmsiz))
-        for itmcd, itmsiz in zip(np.random.randint(9, size=5), [300,600,300,900,600])]
+        for itmcd, itmsiz in zip([randrange(10) for nX in range(5)], [300,600,300,900,600])]
